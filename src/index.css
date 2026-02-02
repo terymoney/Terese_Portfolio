@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+   All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 330 81% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 330 81% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 330 81% 60%;
+
+    --radius: 0.75rem;
+
+    /* Custom blockchain theme colors */
+    --blockchain-glow: 330 81% 60%;
+    --hero-gradient-from: 0 0% 100%;
+    --hero-gradient-to: 210 40% 98%;
+    --code-bg: 210 40% 96%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(0 0% 100%) 0%,
+      hsl(210 40% 98%) 100%
+    );
+    --gradient-card: linear-gradient(
+      180deg,
+      hsl(210 40% 98%) 0%,
+      hsl(0 0% 100%) 100%
+    );
+    --gradient-accent: linear-gradient(
+      90deg,
+      hsl(330 81% 60%) 0%,
+      hsl(340 85% 65%) 100%
+    );
+
+    /* Shadows */
+    --shadow-glow: 0 0 30px hsl(330 81% 60% / 0.2);
+    --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.1);
+    --shadow-elevation: 0 10px 40px hsl(0 0% 0% / 0.15);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 217 33% 17%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 330 81% 60%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 330 81% 60%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 28% 25%;
+    --input: 215 28% 25%;
+    --ring: 330 81% 60%;
+
+    /* Custom blockchain theme colors */
+    --blockchain-glow: 330 81% 60%;
+    --hero-gradient-from: 222 47% 11%;
+    --hero-gradient-to: 217 33% 17%;
+    --code-bg: 220 13% 18%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(222 47% 11%) 0%,
+      hsl(217 33% 17%) 100%
+    );
+    --gradient-card: linear-gradient(
+      180deg,
+      hsl(217 33% 17%) 0%,
+      hsl(222 47% 11%) 100%
+    );
+    --gradient-accent: linear-gradient(
+      90deg,
+      hsl(330 81% 60%) 0%,
+      hsl(340 85% 65%) 100%
+    );
+
+    /* Shadows */
+    --shadow-glow: 0 0 30px hsl(330 81% 60% / 0.3);
+    --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.4);
+    --shadow-elevation: 0 10px 40px hsl(0 0% 0% / 0.5);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ========= Scroll Reveal (single source of truth) =========
+   Use className="reveal-item" on any block (cards, headings, paragraphs).
+   Add .is-visible via IntersectionObserver (you already do this in ProjectsGrid).
+*/
+/* base reveal (cards / sections) */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 650ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 650ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* text travel effect: left -> right */
+.reveal-text {
+  transform: translateX(-18px);
+  filter: blur(0.5px);
+  transition: opacity 700ms ease, transform 700ms ease, filter 700ms ease;
+}
+
+.reveal-text.is-visible {
+  transform: translateX(0);
+  filter: blur(0);
+}
+
+/* accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item,
+  .reveal-item.is-visible,
+  .reveal-text,
+  .reveal-text.is-visible {
+    transition: none;
+    transform: none;
+    filter: none;
+    opacity: 1;
+  }
+}
